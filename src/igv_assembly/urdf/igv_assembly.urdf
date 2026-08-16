@@ -153,7 +153,7 @@
     <child
       link="WheelL3" />
     <axis
-      xyz="0 -1 0" />
+      xyz="0 1 0" />
   </joint>
   <link
     name="BogieL">
@@ -264,7 +264,7 @@
     <child
       link="WheelL2" />
     <axis
-      xyz="0 -1 0" />
+      xyz="0 1 0" />
   </joint>
   <link
     name="WheelL1">
@@ -317,7 +317,7 @@
     <child
       link="WheelL1" />
     <axis
-      xyz="0 -1 0" />
+      xyz="0 1 0" />
   </joint>
   <link
     name="RockerR">
@@ -705,4 +705,27 @@
       effort="100"
       velocity="1" /> -->
   </joint>
+  <gazebo>
+  <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
+      <left_joint>WL1</left_joint>
+      <left_joint>WL2</left_joint>
+      <left_joint>WL3</left_joint>
+
+      <right_joint>WR1</right_joint>
+      <right_joint>WR2</right_joint>
+      <right_joint>WR3</right_joint>
+
+      <wheel_separation>0.390</wheel_separation>
+      <wheel_radius>0.100</wheel_radius>
+
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <odom_topic>odom</odom_topic>
+      <topic>cmd_vel</topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+      <tf_topic>tf</tf_topic>
+  
+  </plugin>
+  <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher"></plugin>
+  </gazebo> 
 </robot>
