@@ -15,8 +15,8 @@ def generate_launch_description():
     )
     urdf_path = os.path.join(pkg_share, 'urdf', 'igv_assembly.urdf')
 
-    world_path = os.path.join(pkg_share, 'worlds', 'empty_world.sdf')
-
+    # world_path = os.path.join(pkg_share, 'worlds', 'empty_world.sdf')
+    world_path = 'shapes.sdf'
     with open(urdf_path, 'r') as f:
         robot_description_content  = f.read() 
 
@@ -36,6 +36,14 @@ def generate_launch_description():
                          'launch',
                          'gz_sim.launch.py')),
                          launch_arguments={'gz_args': f'{world_path} -r'}.items())
+    rviz_node = Node(
+            package="rviz2",
+            executable="rviz2",
+            name="rviz2",
+            output="screen",
+            parameters=[{'use_sim_time' : True}]
+            # arguments=["-d", "/home/navya/Documents/robot/src/robot/config/display.rviz"],
+        )
 
     spawn_entity = Node(
         package='ros_gz_sim',
@@ -51,22 +59,51 @@ def generate_launch_description():
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
-                   '/odom@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
-                   '/model/igv/tf@tf2_msgs/msg/TFMessage@ignition.msgs.Pose_V',
-                   '/joint_states@sensor_msgs/msg/JointState@ignition.msgs.Model'],
-                   output="screen"
+        arguments=[
+            '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
+            '/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
+            '/odom@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
+            '/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
+            '/joint_states@sensor_msgs/msg/JointState[ignition.msgs.Model',
+            '/depth_camera/image@sensor_msgs/msg/Image[ignition.msgs.Image',
+            '/depth_camera/depth_image@sensor_msgs/msg/Image[ignition.msgs.Image',
+            '/depth_camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo'
+        ],
+        output="screen"
+    )
+    rtabmap_params = os.path.join(pkg_share, 'config', 'rtab_config.yaml')
+    rtabmap_node = Node(
+    package='rtabmap_slam',
+    executable='rtabmap',
+    name='rtabmap',
+    output='screen',
+    parameters=[rtabmap_params],
+    remappings=[
+        ('rgb/image', '/depth_camera/image'),
+        ('depth/image', '/depth_camera/depth_image'),
+        ('rgb/camera_info', '/depth_camera/camera_info'),
+        ('odom', '/odom'),
+    ],
+    arguments=['-d'],  # -d = delete previous database on each launch, good while iterating
+)
+    libgl_env = SetEnvironmentVariable(
+        name='LIBGL_ALWAYS_SOFTWARE',
+        value='1'
     )
 
     delayed_spawn = TimerAction(period=5.0, actions=[spawn_entity])
     delayed_bridge = TimerAction(period=5.0, actions=[bridge])
+    delayed_rtab = TimerAction(period=5.0, actions=[rtabmap_node])
 
     return LaunchDescription([
-        resource_path_env, 
+        resource_path_env,
+        libgl_env,
         robot_state_publisher_node,
         ign_gazebo,
         delayed_spawn,
-        delayed_bridge
+        delayed_bridge,
+        delayed_rtab,
+        rviz_node,
     ])
 
     

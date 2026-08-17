@@ -8,17 +8,17 @@
     name="base_link">
     <inertial>
       <origin
-        xyz="0.155000000000001 0.15493300993382 0.0244765687801831"
+        xyz="-5.55111512312578E-16 4.44089209850063E-16 0.0131058382964258"
         rpy="0 0 0" />
       <mass
-        value="1.55304637865748" />
+        value="1.50765036481311" />
       <inertia
-        ixx="0.0173205715881707"
-        ixy="-4.34830427033141E-18"
-        ixz="3.95370060250575E-18"
-        iyy="0.0174478476453804"
-        iyz="5.38979489630026E-06"
-        izz="0.0322943266612261" />
+        ixx="0.0172819216111337"
+        ixy="-4.34830427033138E-18"
+        ixz="-1.39771001490249E-18"
+        iyy="0.0174462077143803"
+        iyz="-5.3897948963004E-06"
+        izz="0.0322556766841891" />
     </inertial>
     <visual>
       <origin
@@ -48,17 +48,17 @@
     name="RockerL">
     <inertial>
       <origin
-        xyz="0.0549614442180303 -0.00166314564848191 -0.0484860403532339"
+        xyz="-0.0444283900462424 -0.00756705252802037 -0.0391939612078949"
         rpy="0 0 0" />
       <mass
-        value="0.0957401232694818" />
+        value="0.118438130191668" />
       <inertia
-        ixx="0.00013569202656573"
-        ixy="-1.49680726799107E-21"
-        ixz="0.000283635186660913"
-        iyy="0.00115752978862403"
-        iyz="-3.29563795855487E-22"
-        izz="0.00102240187506217" />
+        ixx="0.000155017015084251"
+        ixy="-1.48646750943822E-21"
+        ixz="-0.000283635186660913"
+        iyy="0.00115834975412409"
+        iyz="3.29563792754343E-22"
+        izz="0.0010417268635807" />
     </inertial>
     <visual>
       <origin
@@ -86,36 +86,31 @@
   </link>
   <joint
     name="LeftRocker"
-    type="revolute">
+    type="fixed">
     <origin
-      xyz="0.155 -0.048123 0.065"
+      xyz="0 0.203122560056477 0.0550000000000017"
       rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
       link="RockerL" />
     <axis
-      xyz="0 -1 0" />
-    <limit
-      lower="-0.5236"
-      upper="0.5236"
-      effort="100"
-      velocity="1" />
+      xyz="0 1 0" />
   </joint>
   <link
     name="WheelL3">
     <inertial>
       <origin
-        xyz="0 0.0165713300799556 0"
+        xyz="0 -0.0165713300799556 2.22044604925031E-16"
         rpy="0 0 0" />
       <mass
         value="0.095683487480657" />
       <inertia
         ixx="9.61942691845856E-05"
-        ixy="-2.672441888618E-20"
-        ixz="-4.67726692428695E-20"
+        ixy="-2.67115443245389E-20"
+        ixz="4.67357046092461E-20"
         iyy="0.000167342984972362"
-        iyz="-2.39161071862454E-20"
+        iyz="2.38694734300935E-20"
         izz="9.61942691845857E-05" />
     </inertial>
     <visual>
@@ -146,7 +141,7 @@
     name="WL3"
     type="continuous">
     <origin
-      xyz="0.229272035427498 -0.0495 -0.111621385813536"
+      xyz="-0.229272035427498 0.0495 -0.111621385813536"
       rpy="0 0 0" />
     <parent
       link="RockerL" />
@@ -159,16 +154,16 @@
     name="BogieL">
     <inertial>
       <origin
-        xyz="-0.00360601465125066 0.00199999999999945 -0.0510312150797343"
+        xyz="0.00360601465125077 -0.00199999999999989 -0.0510312150797347"
         rpy="0 0 0" />
       <mass
         value="0.0725855377820986" />
       <inertia
         ixx="8.05328649275476E-05"
-        ixy="-1.6120943298763E-21"
-        ixz="2.47858215964137E-05"
+        ixy="-1.61236687743738E-21"
+        ixz="-2.47858215964137E-05"
         iyy="0.000509872951246973"
-        iyz="-1.43659260001532E-21"
+        iyz="1.43622722355043E-21"
         izz="0.000429542783513456" />
     </inertial>
     <visual>
@@ -199,14 +194,14 @@
     name="LeftBogie"
     type="revolute">
     <origin
-      xyz="-0.111132840749356 -0.0165000000000001 -0.0391246943371841"
+      xyz="0.111132840749356 0.0165000000000001 -0.0391246943371841"
       rpy="0 0 0" />
     <parent
       link="RockerL" />
     <child
       link="BogieL" />
     <axis
-      xyz="0 -1 0" />
+      xyz="0 1 0" />
     <limit
       lower="-0.2618"
       upper="0.2618"
@@ -217,16 +212,16 @@
     name="WheelL2">
     <inertial>
       <origin
-        xyz="-1.11022302462516E-16 0.0165713300799555 0"
+        xyz="0 -0.0165713300799556 0"
         rpy="0 0 0" />
       <mass
         value="0.095683487480657" />
       <inertia
-        ixx="9.61942691845857E-05"
-        ixy="-3.36556036611443E-20"
-        ixz="-4.94513127108635E-20"
+        ixx="9.61942691845856E-05"
+        ixy="-3.36416595964494E-20"
+        ixz="4.94771621050058E-20"
         iyy="0.000167342984972362"
-        iyz="-3.33241050522677E-20"
+        iyz="3.33241050522677E-20"
         izz="9.61942691845857E-05" />
     </inertial>
     <visual>
@@ -257,7 +252,7 @@
     name="WL2"
     type="continuous">
     <origin
-      xyz="0.106228768769022 -0.046 -0.0927183837532437"
+      xyz="-0.106228768769022 0.046 -0.0927183837532437"
       rpy="0 0 0" />
     <parent
       link="BogieL" />
@@ -270,17 +265,17 @@
     name="WheelL1">
     <inertial>
       <origin
-        xyz="0 0.0165713300799556 0"
+        xyz="0 -0.0165713300799556 0"
         rpy="0 0 0" />
       <mass
         value="0.095683487480657" />
       <inertia
-        ixx="9.61942691845856E-05"
+        ixx="9.61942691845857E-05"
         ixy="-1.84881341438237E-20"
-        ixz="-4.73560900686608E-20"
+        ixz="4.73560900686608E-20"
         iyy="0.000167342984972362"
-        iyz="-2.65162290658261E-20"
-        izz="9.61942691845857E-05" />
+        iyz="2.65291537628972E-20"
+        izz="9.61942691845858E-05" />
     </inertial>
     <visual>
       <origin
@@ -310,7 +305,7 @@
     name="WL1"
     type="continuous">
     <origin
-      xyz="-0.118211585773428 -0.046 -0.0768587730121344"
+      xyz="0.118211585773428 0.046 -0.0768587730121344"
       rpy="0 0 0" />
     <parent
       link="BogieL" />
@@ -323,17 +318,17 @@
     name="RockerR">
     <inertial>
       <origin
-        xyz="0.0565118383008909 0.000372171145421207 -0.0527281120742709"
+        xyz="-0.0458474111089989 0.00875620819604439 -0.0427777170935231"
         rpy="0 0 0" />
       <mass
-        value="0.0975809423226696" />
+        value="0.120278949244856" />
       <inertia
-        ixx="0.000139858957855428"
-        ixy="6.49740520879406E-22"
-        ixz="0.000276551948895894"
-        iyy="0.00119806719557182"
-        iyz="6.99036016092211E-22"
-        izz="0.00105877725957108" />
+        ixx="0.000159183946373948"
+        ixy="6.14879409715585E-22"
+        ixz="-0.000276551948895894"
+        iyy="0.00119888716107189"
+        iyz="-6.87470951019029E-22"
+        izz="0.0010781022480896" />
     </inertial>
     <visual>
       <origin
@@ -361,36 +356,31 @@
   </link>
   <joint
     name="RightRocker"
-    type="revolute">
+    type="fixed">
     <origin
-      xyz="0.155 0.35504 0.075"
+      xyz="0 -0.200038955864052 0.0649999999999993"
       rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
       link="RockerR" />
     <axis
-      xyz="0 -1 0" />
-    <limit
-      lower="-0.5236"
-      upper="0.5236"
-      effort="100"
-      velocity="1" />
+      xyz="0 1 0" />
   </joint>
   <link
     name="WheelR3">
     <inertial>
       <origin
-        xyz="0 -0.0165713300799555 0"
+        xyz="0 0.0165713300799555 0"
         rpy="0 0 0" />
       <mass
         value="0.095683487480657" />
       <inertia
         ixx="9.61942691845858E-05"
-        ixy="2.29670073864278E-20"
-        ixz="-5.34340167811429E-21"
+        ixy="2.29863529225909E-20"
+        ixz="5.32512598144256E-21"
         iyy="0.000167342984972362"
-        iyz="6.37500204454416E-21"
+        iyz="-6.37858672378045E-21"
         izz="9.61942691845856E-05" />
     </inertial>
     <visual>
@@ -421,7 +411,7 @@
     name="WR3"
     type="continuous">
     <origin
-      xyz="0.232712347234891 0.048 -0.115628558083324"
+      xyz="-0.232712347234891 -0.048 -0.115628558083324"
       rpy="0 0 0" />
     <parent
       link="RockerR" />
@@ -434,16 +424,16 @@
     name="BogieR">
     <inertial>
       <origin
-        xyz="-0.00637209280557083 0.0180000000000016 -0.0507600698133686"
+        xyz="0.00637209280557116 -0.0180000000000005 -0.0507600698133686"
         rpy="0 0 0" />
       <mass
         value="0.0725855377820988" />
       <inertia
-        ixx="8.42503783618711E-05"
-        ixy="1.23128296215196E-21"
-        ixz="4.35656528371853E-05"
+        ixx="8.42503783618712E-05"
+        ixy="1.23375800505978E-21"
+        ixz="-4.35656528371853E-05"
         iyy="0.000509872951246974"
-        iyz="3.68223612626659E-22"
+        iyz="-3.66416361468105E-22"
         izz="0.000425825270079133" />
     </inertial>
     <visual>
@@ -474,14 +464,14 @@
     name="RightBogie"
     type="revolute">
     <origin
-      xyz="-0.10945532574041 -0.00200000000000045 -0.0519690452775528"
+      xyz="0.10945532574041 0.00200000000000045 -0.0519690452775528"
       rpy="0 0 0" />
     <parent
       link="RockerR" />
     <child
       link="BogieR" />
     <axis
-      xyz="0 -1 0" />
+      xyz="0 1 0" />
     <limit
       lower="-0.2618"
       upper="0.2618"
@@ -492,17 +482,17 @@
     name="WheelR2">
     <inertial>
       <origin
-        xyz="-1.11022302462516E-16 -0.0165713300799557 0"
+        xyz="0 0.0165713300799557 0"
         rpy="0 0 0" />
       <mass
         value="0.0956834874806571" />
       <inertia
-        ixx="9.61942691845857E-05"
-        ixy="-1.95416563050687E-20"
-        ixz="-5.2681065261971E-20"
+        ixx="9.61942691845856E-05"
+        ixy="-1.95534318309687E-20"
+        ixz="5.265502065105E-20"
         iyy="0.000167342984972362"
-        iyz="9.59996971102084E-21"
-        izz="9.61942691845858E-05" />
+        iyz="-9.61396990383304E-21"
+        izz="9.61942691845857E-05" />
     </inertial>
     <visual>
       <origin
@@ -532,7 +522,7 @@
     name="WR2"
     type="continuous">
     <origin
-      xyz="0.101036656375721 0.0700000000000005 -0.0983506180377884"
+      xyz="-0.101036656375721 -0.0700000000000005 -0.0983506180377884"
       rpy="0 0 0" />
     <parent
       link="BogieR" />
@@ -545,17 +535,17 @@
     name="WheelR1">
     <inertial>
       <origin
-        xyz="5.55111512312578E-17 -0.0165713300799555 -2.22044604925031E-16"
+        xyz="-5.55111512312578E-17 0.0165713300799555 -2.22044604925031E-16"
         rpy="0 0 0" />
       <mass
-        value="0.095683487480657" />
+        value="0.0956834874806569" />
       <inertia
         ixx="9.61942691845857E-05"
-        ixy="-2.76199221185237E-21"
-        ixz="2.06278165255411E-20"
+        ixy="-2.78103652047748E-21"
+        ixz="-2.06303980183694E-20"
         iyy="0.000167342984972362"
-        iyz="9.71049676253452E-21"
-        izz="9.61942691845857E-05" />
+        iyz="-9.72240209198185E-21"
+        izz="9.61942691845856E-05" />
     </inertial>
     <visual>
       <origin
@@ -585,7 +575,7 @@
     name="WR1"
     type="continuous">
     <origin
-      xyz="-0.122211174343328 0.0660000000000005 -0.0703255207277187"
+      xyz="0.122211174343328 -0.0660000000000005 -0.0703255207277187"
       rpy="0 0 0" />
     <parent
       link="BogieR" />
@@ -598,16 +588,16 @@
     name="DepthCamBase">
     <inertial>
       <origin
-        xyz="0.00124704225458105 -0.0999999999999998 0.0159457633074389"
+        xyz="-0.0103645544560199 -2.22044604925031E-16 -0.00655423669256106"
         rpy="0 0 0" />
       <mass
         value="0.0343289402800121" />
       <inertia
         ixx="0.000141651815846094"
         ixy="4.74805417236241E-21"
-        ixz="2.81915492719261E-07"
+        ixz="-2.81915492719261E-07"
         iyy="3.06683343190886E-06"
-        iyz="-3.58836565598776E-21"
+        iyz="3.58836565598776E-21"
         izz="0.0001396245386447" />
     </inertial>
     <visual>
@@ -638,7 +628,7 @@
     name="DC_Base"
     type="fixed">
     <origin
-      xyz="-0.005 0.255 0.075"
+      xyz="0.169117512201439 0 0.0874999999999999"
       rpy="0 0 0" />
     <parent
       link="base_link" />
@@ -651,17 +641,17 @@
     name="DepthCam">
     <inertial>
       <origin
-        xyz="-0.0371258012863737 -0.100000709919781 0.0377011064576946"
+        xyz="0.0280082890849347 7.09919781405333E-07 0.0152011064576949"
         rpy="0 0 0" />
       <mass
-        value="0.213055140920182" />
+        value="0.01" />
       <inertia
-        ixx="0.000507795775995203"
-        ixy="3.25109289212619E-09"
-        ixz="9.61683982873067E-07"
-        iyy="4.23050919654126E-05"
-        iyz="-1.55012001977324E-09"
-        izz="0.000525016941556373" />
+        ixx="0.0001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.0001"
+        iyz="0.0"
+        izz="0.0001" />
     </inertial>
     <visual>
       <origin
@@ -689,7 +679,7 @@
   </link>
   <joint
     name="DC"
-    type="continuous">
+    type="fixed">
     <origin
       xyz="0 0 0"
       rpy="0 0 0" />
@@ -698,13 +688,23 @@
     <child
       link="DepthCam" />
     <axis
-      xyz="0 -1 0" />
-    <!-- <limit
-      lower="0"
-      upper="0"
-      effort="100"
-      velocity="1" /> -->
+      xyz="0 1 0" />
   </joint>
+
+  <link
+    name="DepthCamVirtual"/>
+  <joint name="depth_cam_virtual_joint" type="fixed">
+    <origin xyz="0.05 0 0" rpy="0 0 0"/>
+    <parent link="DepthCam"/>
+    <child link="DepthCamVirtual"/>
+  </joint>
+  <link
+    name="DepthCamOptical"/>
+    <joint name="optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+      <parent link="DepthCamVirtual"/>
+      <child link="DepthCamOptical"/>
+    </joint>
   <gazebo>
   <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
       <left_joint>WL1</left_joint>
@@ -715,7 +715,7 @@
       <right_joint>WR2</right_joint>
       <right_joint>WR3</right_joint>
 
-      <wheel_separation>0.390</wheel_separation>
+      <wheel_separation>0.550</wheel_separation>
       <wheel_radius>0.100</wheel_radius>
 
       <odom_publish_frequency>50</odom_publish_frequency>
@@ -723,9 +723,53 @@
       <topic>cmd_vel</topic>
       <frame_id>odom</frame_id>
       <child_frame_id>base_link</child_frame_id>
-      <tf_topic>tf</tf_topic>
-  
+      <tf_topic>/tf</tf_topic>
   </plugin>
-  <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher"></plugin>
-  </gazebo> 
+  <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+  <topic>joint_states</topic>
+  </plugin>
+  <plugin
+      filename="ignition-gazebo-sensors-system"
+      name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-imu-system"
+      name="ignition::gazebo::systems::Imu">
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="DepthCamVirtual">
+    <sensor type='rgbd_camera' name="Depth_Camera">
+      <always_on>true</always_on>
+      <update_rate>15.0</update_rate>
+      <topic>depth_camera</topic>
+      <camera name="depth_camera"> 
+        <optical_frame_id>DepthCamOptical</optical_frame_id>
+        <horizontal_fov>1.777</horizontal_fov>
+        <image> 
+          <width>1280</width>
+          <height>720</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+            <near>
+              0.1
+            </near>
+            <far>
+              10.0
+            </far>
+        </clip>
+        <lens>
+          <intrinsics>
+            <fx>520.3729858398438</fx>
+            <fy>520.3729858398438</fy>
+            <cx>654.4447631835938</cx>
+            <cy>365.853271484375</cy>
+            <s>0</s>
+          </intrinsics>
+        </lens>
+      </camera>
+    </sensor>
+  </gazebo>
 </robot>
