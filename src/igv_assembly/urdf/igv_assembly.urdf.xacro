@@ -3,7 +3,7 @@
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
-  name="igv_assembly">
+  name="igv_assembly" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <link
     name="base_link">
     <inertial>
@@ -706,40 +706,16 @@
       <child link="DepthCamOptical"/>
     </joint>
   <gazebo>
-  <!-- <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
-      <left_joint>WL1</left_joint>
-      <left_joint>WL2</left_joint>
-      <left_joint>WL3</left_joint>
-
-      <right_joint>WR1</right_joint>
-      <right_joint>WR2</right_joint>
-      <right_joint>WR3</right_joint>
-
-      <wheel_separation>0.550</wheel_separation>
-      <wheel_radius>0.100</wheel_radius>
-
-      <odom_publish_frequency>50</odom_publish_frequency>
-      <odom_topic>odom</odom_topic>
-      <topic>cmd_vel</topic>
-      <frame_id>odom</frame_id>
-      <child_frame_id>base_link</child_frame_id>
-      <tf_topic>/tf</tf_topic>
-  </plugin> -->
-  <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
-  <topic>joint_states</topic>
-  </plugin>
-  <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
-    <parameters>$(find igv_assembly)/config/controllers.yaml</parameters>
-  </plugin>
-
-  <plugin
-      filename="ignition-gazebo-sensors-system"
-      name="ignition::gazebo::systems::Sensors">
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <topic>joint_states</topic>
+    </plugin>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find igv_assembly)/config/controllers.yaml</parameters>
+    </plugin>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin>
-    <plugin
-      filename="ignition-gazebo-imu-system"
-      name="ignition::gazebo::systems::Imu">
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
     </plugin>
   </gazebo>
 
@@ -757,12 +733,8 @@
           <format>R8G8B8</format>
         </image>
         <clip>
-            <near>
-              0.1
-            </near>
-            <far>
-              10.0
-            </far>
+          <near>0.1</near>
+          <far>10.0</far>
         </clip>
         <lens>
           <intrinsics>
@@ -779,8 +751,16 @@
 
   <ros2_control name="IgnitionSystem" type="system">
       <hardware>
-        <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
+
+      <joint name="RightBogie">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="LeftBogie">
+        <state_interface name="position"/>
+      </joint>
+
       <joint name="WL1">
         <command_interface name="velocity">
           <param name="min">-10</param>
@@ -830,4 +810,5 @@
         <state_interface name="velocity"/>
       </joint>
   </ros2_control>
+
 </robot>
