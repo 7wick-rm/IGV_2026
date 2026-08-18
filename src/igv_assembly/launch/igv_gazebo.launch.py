@@ -13,6 +13,10 @@ def generate_launch_description():
     name='GZ_SIM_RESOURCE_PATH',
     value=os.path.dirname(pkg_share) + os.pathsep + os.environ.get('GZ_SIM_RESOURCE_PATH', '')
     )
+    gz_version_env = SetEnvironmentVariable(
+        name='GZ_VERSION',
+        value='6'
+    )
     urdf_path = os.path.join(pkg_share, 'urdf', 'igv_assembly.urdf')
 
     # world_path = os.path.join(pkg_share, 'worlds', 'empty_world.sdf')
@@ -91,18 +95,36 @@ def generate_launch_description():
         value='1'
     )
 
+    spawn_joint_state_broadcaster = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+
+    spawn_diff_drive_controller = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['diff_drive_controller', '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+
     delayed_spawn = TimerAction(period=5.0, actions=[spawn_entity])
     delayed_bridge = TimerAction(period=5.0, actions=[bridge])
     delayed_rtab = TimerAction(period=5.0, actions=[rtabmap_node])
 
+    delayed_controllers = TimerAction(period=8.0, actions=[spawn_joint_state_broadcaster,spawn_diff_drive_controller])
+
     return LaunchDescription([
         resource_path_env,
         libgl_env,
+        gz_version_env,
         robot_state_publisher_node,
         ign_gazebo,
         delayed_spawn,
         delayed_bridge,
         delayed_rtab,
+        delayed_controllers,
         rviz_node,
     ])
 

@@ -1,0 +1,22 @@
+digraph G {
+"odom" -> "base_link"[label=" Broadcaster: default_authority\nAverage rate: 50.205\nBuffer length: 4.88\nMost recent transform: 362.585\nOldest transform: 357.705\n"];
+"map" -> "odom"[label=" Broadcaster: default_authority\nAverage rate: 20.735\nBuffer length: 4.871\nMost recent transform: 362.694\nOldest transform: 357.823\n"];
+"DepthCamBase" -> "DepthCam"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "DepthCamBase"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "RockerL"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "RockerR"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"DepthCam" -> "DepthCamVirtual"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"DepthCamVirtual" -> "DepthCamOptical"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"RockerL" -> "BogieL"[label=" Broadcaster: default_authority\nAverage rate: 20.206\nBuffer length: 4.85\nMost recent transform: 362.575\nOldest transform: 357.725\n"];
+"RockerR" -> "BogieR"[label=" Broadcaster: default_authority\nAverage rate: 20.206\nBuffer length: 4.85\nMost recent transform: 362.575\nOldest transform: 357.725\n"];
+"BogieL" -> "WheelL1"[label=" Broadcaster: default_authority\nAverage rate: 20.206\nBuffer length: 4.85\nMost recent transform: 362.575\nOldest transform: 357.725\n"];
+"BogieL" -> "WheelL2"[label=" Broadcaster: default_authority\nAverage rate: 20.206\nBuffer length: 4.85\nMost recent transform: 362.575\nOldest transform: 357.725\n"];
+"RockerL" -> "WheelL3"[label=" Broadcaster: default_authority\nAverage rate: 20.206\nBuffer length: 4.85\nMost recent transform: 362.575\nOldest transform: 357.725\n"];
+"BogieR" -> "WheelR1"[label=" Broadcaster: default_authority\nAverage rate: 20.206\nBuffer length: 4.85\nMost recent transform: 362.575\nOldest transform: 357.725\n"];
+"BogieR" -> "WheelR2"[label=" Broadcaster: default_authority\nAverage rate: 20.206\nBuffer length: 4.85\nMost recent transform: 362.575\nOldest transform: 357.725\n"];
+"RockerR" -> "WheelR3"[label=" Broadcaster: default_authority\nAverage rate: 20.206\nBuffer length: 4.85\nMost recent transform: 362.575\nOldest transform: 357.725\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1786986928.1374123"[ shape=plaintext ] ;
+}->"map";
+}
