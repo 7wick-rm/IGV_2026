@@ -16,7 +16,7 @@ def generate_launch_description():
     )
     
     urdf_path = os.path.join(pkg_share, 'urdf', 'simple_bot.urdf.xacro')
-    world_path = "/home/akshit/IGV_2026/src/igv_assembly/worlds/living_room.sdf"
+    world_path = "shapes.sdf"
     
     robot_description_content = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
 
@@ -25,8 +25,8 @@ def generate_launch_description():
         executable='robot_state_publisher',
         output='screen',
         parameters=[{
-            'robot_description' : robot_description_content,
-            'use_sim_time' : True
+            'robot_description': robot_description_content,
+            'use_sim_time': True
         }]    
     )
 
@@ -43,22 +43,21 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2",
         output="screen",
-        parameters=[{'use_sim_time' : True}]
+        parameters=[{'use_sim_time': True}]
     )
 
     spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
         arguments=[
-            '-topic','robot_description',
-            '-name','igv',
+            '-topic', 'robot_description',
+            '-name', 'igv',
             '-x', '-0.8',
-            '-z','0.3'
+            '-z', '0.3'
         ],
         output='screen'
     )
 
-    # Corrected GZ message syntax and topic paths
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -68,6 +67,7 @@ def generate_launch_description():
             '/depth_camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image',
             '/depth_camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo'
         ],
+        parameters=[{'use_sim_time': True}],
         output="screen"
     )
 
@@ -77,12 +77,12 @@ def generate_launch_description():
         executable='rtabmap',
         name='rtabmap',
         output='screen',
-        parameters=[rtabmap_params],
+        parameters=[rtabmap_params, {'use_sim_time': True}],
         remappings=[
             ('rgb/image', '/depth_camera/image'),
             ('depth/image', '/depth_camera/depth_image'),
             ('rgb/camera_info', '/depth_camera/camera_info'),
-            ('odom', '/odom'),
+            ('odom', '/diff_drive_controller/odom'), # Verified against diff_drive standard topic
         ],
         arguments=['-d'], 
     )
@@ -101,10 +101,10 @@ def generate_launch_description():
         output='screen',
     )
 
-    delayed_spawn = TimerAction(period=5.0, actions=[spawn_entity])
-    delayed_bridge = TimerAction(period=5.0, actions=[bridge])
-    delayed_rtab = TimerAction(period=5.0, actions=[rtabmap_node])
-    delayed_controllers = TimerAction(period=8.0, actions=[spawn_joint_state_broadcaster, spawn_diff_drive_controller])
+    delayed_spawn = TimerAction(period=3.0, actions=[spawn_entity])
+    delayed_bridge = TimerAction(period=3.0, actions=[bridge])
+    delayed_controllers = TimerAction(period=5.0, actions=[spawn_joint_state_broadcaster, spawn_diff_drive_controller])
+    delayed_rtab = TimerAction(period=7.0, actions=[rtabmap_node])
 
     return LaunchDescription([
         resource_path_env,
@@ -112,7 +112,7 @@ def generate_launch_description():
         gz_gazebo,
         delayed_spawn,
         delayed_bridge,
-        delayed_rtab,
         delayed_controllers,
+        delayed_rtab,
         rviz_node,
     ])
