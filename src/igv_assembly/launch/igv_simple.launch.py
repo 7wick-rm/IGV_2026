@@ -16,7 +16,7 @@ def generate_launch_description():
     )
     
     urdf_path = os.path.join(pkg_share, 'urdf', 'simple_bot.urdf.xacro')
-    world_path = 'shapes.sdf'
+    world_path = "/home/akshit/IGV_2026/src/igv_assembly/worlds/living_room.sdf"
     
     robot_description_content = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
 

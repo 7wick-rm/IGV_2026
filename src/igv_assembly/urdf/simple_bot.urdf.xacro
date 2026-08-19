@@ -19,7 +19,7 @@
   <!-- ================= WHEELS ================= -->
   <link name="FL_Wheel">
     <visual><geometry><cylinder radius="0.1" length="0.05"/></geometry></visual>
-    <collision><geometry><cylinder radius="0.1" length="0.05"/></geometry></collision>
+    <collision><geometry><sphere radius="0.1"/></geometry></collision>
     <inertial><mass value="1.0"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.005"/></inertial>
   </link>
   <joint name="FL_Joint" type="continuous">
@@ -31,7 +31,7 @@
 
   <link name="FR_Wheel">
     <visual><geometry><cylinder radius="0.1" length="0.05"/></geometry></visual>
-    <collision><geometry><cylinder radius="0.1" length="0.05"/></geometry></collision>
+    <collision><geometry><sphere radius="0.1"/></geometry></collision>
     <inertial><mass value="1.0"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.005"/></inertial>
   </link>
   <joint name="FR_Joint" type="continuous">
@@ -43,7 +43,7 @@
 
   <link name="RL_Wheel">
     <visual><geometry><cylinder radius="0.1" length="0.05"/></geometry></visual>
-    <collision><geometry><cylinder radius="0.1" length="0.05"/></geometry></collision>
+    <collision><geometry><sphere radius="0.1"/></geometry></collision>
     <inertial><mass value="1.0"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.005"/></inertial>
   </link>
   <joint name="RL_Joint" type="continuous">
@@ -55,7 +55,7 @@
 
   <link name="RR_Wheel">
     <visual><geometry><cylinder radius="0.1" length="0.05"/></geometry></visual>
-    <collision><geometry><cylinder radius="0.1" length="0.05"/></geometry></collision>
+    <collision><geometry><sphere radius="0.1"/></geometry></collision>
     <inertial><mass value="1.0"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.005"/></inertial>
   </link>
   <joint name="RR_Joint" type="continuous">
@@ -137,33 +137,37 @@
 
   <gazebo reference="FL_Wheel">
     <mu1>1.0</mu1>
-    <mu2>0.1</mu2>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
+    <mu2>0.2</mu2>
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
     <minDepth>0.001</minDepth>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
   
   <gazebo reference="FR_Wheel">
     <mu1>1.0</mu1>
-    <mu2>0.1</mu2>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
+    <mu2>0.2</mu2>
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
     <minDepth>0.001</minDepth>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
   
   <gazebo reference="RL_Wheel">
     <mu1>1.0</mu1>
-    <mu2>0.1</mu2>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
+    <mu2>0.2</mu2>
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
     <minDepth>0.001</minDepth>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
   
   <gazebo reference="RR_Wheel">
     <mu1>1.0</mu1>
-    <mu2>0.1</mu2>
-    <kp>10000000.0</kp>
-    <kd>1.0</kd>
+    <mu2>0.2</mu2>
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
     <minDepth>0.001</minDepth>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
 </robot>
