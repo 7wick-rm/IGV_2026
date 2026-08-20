@@ -11,7 +11,7 @@ rtabmap:
     wait_for_transform: 0.5
     use_sim_time: true
 
-    Reg/Strategy: "2" #visual registration strategy. slam comparison.
+    Reg/Strategy: "1" #visual registration strategy. slam comparison.
     Reg/Force3DoF: "true"
     RGBD/NeighborLinkRefining: "true"
     RGBD/AngularUpdate: "0.05"
@@ -21,6 +21,6 @@ rtabmap:
     RGBD/ProximityMaxGraphDepth: "10"  
     RGBD/ProximityAngle: "45"
     Grid/FromDepth: "true"
-    # Grid/RayTracing: "true"
+    Grid/RayTracing: "true"
     Icp/VoxelSize: "0.05"
     Icp/MaxCorrespondenceDistance: "0.2"
