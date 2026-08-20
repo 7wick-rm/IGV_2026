@@ -3,24 +3,24 @@ rtabmap:
     frame_id: "base_link"
     odom_frame_id: "odom"
     map_frame_id: "map"
+    subscribe_scan: false
     subscribe_depth: true
     subscribe_rgb: true
     approx_sync: true
     sync_queue_size: 10
     wait_for_transform: 0.5
     use_sim_time: true
-    
-    rtabmap:
-      Reg/Strategy: "1"
-      Reg/Force3DoF: "true"                
-      RGBD/NeighborLinkRefining: "true"   
-      RGBD/AngularUpdate: "0.05"          
-      RGBD/LinearUpdate: "0.05" 
-      RGBD/ProximityBySpace: "true"
 
-      Vis/MinInliers: "5"
-
-      Grid/FromDepth: "true"
-      Grid/RayTracing: "true"             
-      Icp/VoxelSize: "0.05"
-      Icp/MaxCorrespondenceDistance: "0.2"
+    Reg/Strategy: "2" #visual registration strategy. slam comparison.
+    Reg/Force3DoF: "true"
+    RGBD/NeighborLinkRefining: "true"
+    RGBD/AngularUpdate: "0.05"
+    RGBD/LinearUpdate: "0.05"
+    RGBD/ProximityBySpace: "true"
+    Vis/MinInliers: "3" #minimum number of points required to detect loop closure
+    RGBD/ProximityMaxGraphDepth: "10"  
+    RGBD/ProximityAngle: "45"
+    Grid/FromDepth: "true"
+    # Grid/RayTracing: "true"
+    Icp/VoxelSize: "0.05"
+    Icp/MaxCorrespondenceDistance: "0.2"
