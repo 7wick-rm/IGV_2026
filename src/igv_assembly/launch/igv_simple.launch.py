@@ -6,6 +6,8 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.descriptions import ParameterValue
 from launch.substitutions import Command
+from launch.actions import GroupAction
+from launch_ros.actions import SetRemap
 
 def generate_launch_description():
     pkg_share = get_package_share_directory('igv_assembly')
@@ -19,6 +21,28 @@ def generate_launch_description():
     world_path = "shapes.sdf"
     
     robot_description_content = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
+
+    nav2_params_path = os.path.join(pkg_share, 'config', 'nav2_params.yaml')
+
+
+
+    nav2_group = GroupAction(
+        actions=[
+            # This redirects Nav2's standard output to your controller's input
+            SetRemap(src='/cmd_vel', dst='/diff_drive_controller/cmd_vel_unstamped'),
+            
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'navigation_launch.py')
+                ),
+                launch_arguments={
+                    'use_sim_time': 'true',
+                    'params_file': nav2_params_path,
+                }.items()
+            )
+        ]
+    )
+    
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
@@ -105,6 +129,7 @@ def generate_launch_description():
     delayed_bridge = TimerAction(period=3.0, actions=[bridge])
     delayed_controllers = TimerAction(period=5.0, actions=[spawn_joint_state_broadcaster, spawn_diff_drive_controller])
     delayed_rtab = TimerAction(period=7.0, actions=[rtabmap_node])
+    delayed_nav2 = TimerAction(period=10.0, actions=[nav2_group])
 
     return LaunchDescription([
         resource_path_env,
@@ -114,5 +139,6 @@ def generate_launch_description():
         delayed_bridge,
         delayed_controllers,
         delayed_rtab,
+        delayed_nav2,
         rviz_node,
     ])

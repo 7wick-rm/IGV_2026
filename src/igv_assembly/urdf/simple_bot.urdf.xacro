@@ -17,7 +17,6 @@
   </link>
 
   <!-- ================= WHEEL MACRO ================= -->
-<!-- ================= WHEEL MACRO ================= -->
   <xacro:macro name="wheel" params="prefix x_reflect y_reflect">
     <link name="${prefix}_Wheel">
       <visual>
