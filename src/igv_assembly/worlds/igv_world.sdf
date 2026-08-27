@@ -33,7 +33,7 @@
     </plugin>
 
     <!-- GUI camera pose to focus on rover spawn location -->
-    <gui fullscreen="0">
+    <!-- <gui fullscreen="0">
       <plugin filename="GzScene3D" name="3D View">
         <ignition-gui>
           <title>3D View</title>
@@ -42,10 +42,9 @@
         </ignition-gui>
         <engine>ogre2</engine>
         <scene>scene</scene>
-        <!-- Camera pose: X Y Z Roll Pitch Yaw -->
         <camera_pose>-18.34 -6.35 3.3 0 0.5 0</camera_pose>
       </plugin>
-    </gui>
+    </gui> -->
 
     <plugin
       filename="ignition-gazebo-sensors-system"
@@ -72,20 +71,47 @@
       </attenuation>
     </light>
 
-    <include>
+
+    <model name="custom_stl_object">
+      <static>true</static> <!-- Set to false if it needs physics/gravity -->
+      <pose>1.0 0.0 3.0 0 0 0</pose> <!-- Position: X Y Z Roll Pitch Yaw -->
+
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>package://igv_assembly/meshes/track_2.obj</uri>
+              <scale>0.01 0.01 0.01</scale> <!-- Adjust scaling if STL units are in mm (0.001 0.001 0.001) -->
+            </mesh>
+          </geometry>
+        </visual>
+
+        <!-- Collision Geometry -->
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <uri>package://igv_assembly/meshes/track_2.obj</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- <include>
       <uri>
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/baylands
       </uri>
       <name>park</name>
       <pose>205 155 -1 0 0 0</pose>
-    </include>
+    </include> -->
 
-    <spherical_coordinates>
+    <!-- <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <world_frame_orientation>ENU</world_frame_orientation>
       <latitude_deg>37.412173071650805</latitude_deg>
       <longitude_deg>-121.998878727967</longitude_deg>
       <elevation>38</elevation>
-    </spherical_coordinates>
+    </spherical_coordinates> -->
   </world>
 </sdf>

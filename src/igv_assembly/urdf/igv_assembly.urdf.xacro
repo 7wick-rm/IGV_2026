@@ -465,7 +465,7 @@
     <surface>
       <friction>
         <ode>
-          <mu>10000000.0</mu>
+          <mu>100.0</mu>
           <mu2>0.2</mu2>
           <fdir1>1 0 0 </fdir1> 
         </ode>
@@ -486,7 +486,7 @@
     <surface>
       <friction>
         <ode>
-          <mu>10000000.0</mu>
+          <mu>1.0</mu>
           <mu2>0.2</mu2>
           <fdir1> 1 0 0 </fdir1> 
         </ode>
@@ -507,7 +507,7 @@
     <surface>
       <friction>
         <ode>
-          <mu>10000000.0</mu>
+          <mu>1.0</mu>
           <mu2>0.2</mu2>
           <fdir1>1 0 0 </fdir1> 
         </ode>
@@ -528,7 +528,7 @@
     <surface>
       <friction>
         <ode>
-          <mu>10000000.0</mu>
+          <mu>1.0</mu>
           <mu2>0.2</mu2>
           <fdir1>1 0 0 </fdir1> 
         </ode>
@@ -549,7 +549,7 @@
     <surface>
       <friction>
         <ode>
-          <mu>1000000000.0</mu>
+          <mu>1.0</mu>
           <mu2>0.2</mu2>
           <fdir1> 1 0 0 </fdir1> 
         </ode>
@@ -570,7 +570,7 @@
     <surface>
       <friction>
         <ode>
-          <mu>100000000.0</mu>
+          <mu>1.0</mu>
           <mu2>0.2</mu2>
           <fdir1> 1 0 0 </fdir1> 
         </ode>
